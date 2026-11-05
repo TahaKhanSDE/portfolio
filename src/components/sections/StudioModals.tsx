@@ -180,7 +180,7 @@ export default function StudioModals({
                     required
                     value={passkeyInput}
                     onChange={(e) => setPasskeyInput(e.target.value)}
-                    placeholder="Enter passkey (default: wingslug2026)"
+                    placeholder="Enter passkey"
                     className="w-full bg-[#121316] border-2 border-zinc-800 focus:border-[#FFD13B] focus:outline-none p-3 rounded text-[#F4F5F7]"
                   />
                 </div>
