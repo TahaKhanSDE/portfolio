@@ -9,6 +9,7 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+.yarn/install-state.gz
 
 # testing
 /coverage
@@ -16,6 +17,7 @@
 # next.js
 /.next/
 /out/
+.turbo/
 
 # production
 /build
@@ -32,6 +34,10 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+.env
+.env*.local
+.env.production
+.env.staging
 
 # vercel
 .vercel
@@ -39,3 +45,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# OS Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE & Editor Configs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
