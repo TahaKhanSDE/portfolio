@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
+import AudioPlayer from '@/components/AudioPlayer';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -15,6 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -31,6 +36,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         {children}
+        <AudioPlayer />
         <Analytics />
       </body>
     </html>
