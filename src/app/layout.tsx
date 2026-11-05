@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Taha Hakim Khan — Full-Stack & Systems Engineer | Portfolio',
-  description: 'Neo-Brutalism & Cyber-Noir developer portfolio for Taha Hakim Khan.',
+  description: 'Cyber-noir portfolio of Taha Khan, Full-Stack Engineer and Distributed Systems Architect.',
 };
 
 export default function RootLayout({
@@ -30,6 +31,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
