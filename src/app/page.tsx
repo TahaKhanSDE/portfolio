@@ -163,7 +163,7 @@ export default function PortfolioPage() {
     secondaryEmail: 'thinkercol@gmail.com',
     githubUrl: 'https://github.com/TahaKhanSDE',
     linkedinUrl: 'https://linkedin.com/in/tahakhansde',
-    resumeUrl: 'https://drive.google.com/file/d/your-resume-id/view?usp=sharing',
+    resumeUrl: 'https://drive.google.com/file/d/15z10NO4YSWoWD5T8eUU3CFAO_GRYwj6C/view?usp=drive_link',
   });
 
   const [toastMessage, setToastMessage] = useState<string | null>(null);
