@@ -2,46 +2,33 @@
 
 > **Cyber-Noir / Neo-Brutalist Personal Engineering Platform** engineered with high-concurrency architecture showcases, dynamic telemetry terminals, interactive secret studio state mutation, and a persistent background audio engine.
 
-[![Production Deployment](https://img.shields.io/badge/LIVE%20PLATFORM-tahakhansde.vercel.app-FFD13B?style=for-the-badge&logo=vercel&logoColor=121316)](https://tahakhansde.vercel.app)
-[![Next.js 16](https://img.shields.io/badge/Next.js-16-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-
----
-
 ## 🌐 Live URLs
 
-* **Primary Production Domain:** [https://tahakhansde.vercel.app](https://tahakhansde.vercel.app)
-* **Vercel System Fallback:** [https://portfolio-mohammad-taha-khan.vercel.app](https://portfolio-mohammad-taha-khan.vercel.app)
-
----
+* **Primary Production Domain:** <https://tahakhansde.vercel.app>
+* **Vercel System Fallback:** <https://portfolio-mohammad-taha-khan.vercel.app>
 
 ## 📱 Mobile Scan & Access Matrix (3 QR Flavors)
 
 Scan directly with any mobile camera, or click to download the vector `.svg` asset.
 
-| 01. Cyber-Noir (Dark & Yellow) | 02. Inverted Accent (Yellow & Dark) | 03. High-Contrast Print (B & W) |
-| :---: | :---: | :---: |
-| <a href="https://tahakhansde.vercel.app"><img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https://tahakhansde.vercel.app&color=FFD13B&bgcolor=121316&qzone=2&format=svg" alt="Cyber Noir QR" width="180" height="180" /></a> | <a href="https://tahakhansde.vercel.app"><img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https://tahakhansde.vercel.app&color=121316&bgcolor=FFD13B&qzone=2&format=svg" alt="Inverted Accent QR" width="180" height="180" /></a> | <a href="https://tahakhansde.vercel.app"><img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https://tahakhansde.vercel.app&color=000000&bgcolor=FFFFFF&qzone=2&format=svg" alt="Print-Ready B&W QR" width="180" height="180" /></a> |
-| `Dark Canvas // Yellow Matrix` | `Amber Highlight // Noir Matrix` | `Clean Minimalist // Resume Standard` |
-| [⬇️ Direct SVG Download](https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=https://tahakhansde.vercel.app&color=FFD13B&bgcolor=121316&qzone=2&format=svg) | [⬇️ Direct SVG Download](https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=https://tahakhansde.vercel.app&color=121316&bgcolor=FFD13B&qzone=2&format=svg) | [⬇️ Direct SVG Download](https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=https://tahakhansde.vercel.app&color=000000&bgcolor=FFFFFF&qzone=2&format=svg) |
-
----
+| 01. Cyber-Noir (Dark & Yellow) | 02. Inverted Accent (Yellow & Dark) | 03. High-Contrast Print (B & W) | 
+| :---: | :---: | :---: | 
+| <a href="https://tahakhansde.vercel.app"><img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https://tahakhansde.vercel.app&color=FFD13B&bgcolor=121316&qzone=2&format=svg" alt="Cyber-Noir QR SVG" width="180" height="180" /></a> | <a href="https://tahakhansde.vercel.app"><img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https://tahakhansde.vercel.app&color=121316&bgcolor=FFD13B&qzone=2&format=svg" alt="Inverted Accent QR SVG" width="180" height="180" /></a> | <a href="https://tahakhansde.vercel.app"><img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https://tahakhansde.vercel.app&color=000000&bgcolor=FFFFFF&qzone=2&format=svg" alt="Print-Ready QR SVG" width="180" height="180" /></a> | 
+| `Dark Canvas // Yellow Matrix` | `Amber Highlight // Noir Matrix` | `Clean Minimalist // Resume Standard` | 
+| [⬇️ Direct SVG Download](https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=https://tahakhansde.vercel.app&color=FFD13B&bgcolor=121316&qzone=2&format=svg) | [⬇️ Direct SVG Download](https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=https://tahakhansde.vercel.app&color=121316&bgcolor=FFD13B&qzone=2&format=svg) | [⬇️ Direct SVG Download](https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=https://tahakhansde.vercel.app&color=000000&bgcolor=FFFFFF&qzone=2&format=svg) | 
 
 ## 🖥️ Production Interface
 
 <div align="center">
   <a href="https://tahakhansde.vercel.app">
-    <img src="./public/portfolio-preview.jpg" alt="Taha Hakim Khan - Cyber Noir Portfolio Interface" width="750" />
+    <img src="./public/portfolio-preview.png" alt="Taha Hakim Khan - Cyber Noir Portfolio Interface" width="800" style="border: 2px solid #FFD13B; border-radius: 8px;" />
   </a>
   <p align="center"><sub>Full-bleed render of the live Next.js cyber-noir engineering layout.</sub></p>
 </div>
 
----
-
 ## 📁 Repository Structure
 
-```text
+```
 portfolio/
 ├── .github/workflows/ci.yml       (GitHub Actions CI/CD pipeline)
 ├── public/
@@ -49,7 +36,7 @@ portfolio/
 │   ├── hero-avatar.png           (High-fidelity comic-noir inked avatar)
 │   ├── hero-avatar.svg           (Fallback vector skeleton)
 │   ├── my-new-type-of-hero.mp3   (Background soundtrack asset)
-│   └── portfolio-preview.jpg     (Full-page screenshot showcase)
+│   └── portfolio-preview.png     (Full-page screenshot showcase)
 ├── src/
 │   ├── app/
 │   │   ├── api/contact/route.ts  (Lead dispatch engine - Telegram & Resend)
@@ -74,16 +61,12 @@ portfolio/
 └── tsconfig.json
 ```
 
----
-
 ## ⚡ Key Highlights & Core Features
 
 * **High-Fidelity Ink & Shadow Media:** Replaced wireframe placeholders with ink-hatched artwork (`hero-avatar.png`) and street crosswalk contrast photography (`about-shadow.jpg`), optimized automatically to WebP/AVIF at the edge.
 * **Persistent Audio Rack & Visualizer:** Vertical deck docked on the right plane (`h-[66vh]`) with user-gesture autoplay recovery, a 40% vertical volume fader, and an audio spectrum projecting outward horizontally from the left border.
 * **Secret Studio Engine:** Press the tilde / backtick key or tap the status badge 5 times to authenticate with passphrase `wingslug2026`. Mutate terminal status, timeline milestones, and audio track configs live with instant local storage persistence and event broadcasting.
 * **Privacy-Friendly Edge Analytics:** Real-time traffic, geolocations, and visitor metrics tracked via `@vercel/analytics`.
-
----
 
 ## 🚀 Local Development Setup
 
@@ -104,13 +87,11 @@ npm run dev
 
 The platform runs locally at `http://localhost:3000`.
 
----
-
 ## 👨‍💻 Engineer
 
 **Taha Hakim Khan**  
 *Full-Stack Engineer & Distributed Systems Builder*  
-* **Live Website:** [tahakhansde.vercel.app](https://tahakhansde.vercel.app)
-* **GitHub:** [@TahaKhanSDE](https://github.com/TahaKhanSDE)
-* **LinkedIn:** [tahakhansde](https://linkedin.com/in/tahakhansde)
+* **Live Website:** [tahakhansde.vercel.app](https://tahakhansde.vercel.app)  
+* **GitHub:** [@TahaKhanSDE](https://github.com/TahaKhanSDE)  
+* **LinkedIn:** [tahakhansde](https://linkedin.com/in/tahakhansde)  
 * **Email:** [mohd.tahakhan9@gmail.com](mailto:mohd.tahakhan9@gmail.com)
