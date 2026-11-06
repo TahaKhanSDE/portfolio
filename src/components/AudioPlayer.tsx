@@ -49,33 +49,37 @@ export default function AudioPlayer() {
     };
   }, []);
 
-  // Autoplay with user interaction unlock
+  // Autoplay Logic: Unmuted by default with gesture fallback
   useEffect(() => {
-    const playAudio = () => {
-      if (audioRef.current) {
-        audioRef.current.volume = isMuted ? 0 : volume;
-        audioRef.current
-          .play()
-          .then(() => setIsPlaying(true))
-          .catch(() => {
-            const unlockPlay = () => {
-              if (audioRef.current && !isPlaying) {
-                audioRef.current.play().then(() => setIsPlaying(true));
-              }
-              window.removeEventListener('click', unlockPlay);
-              window.removeEventListener('keydown', unlockPlay);
-              window.removeEventListener('scroll', unlockPlay);
-            };
+    const el = audioRef.current;
+    if (!el) return;
 
-            window.addEventListener('click', unlockPlay, { once: true });
-            window.addEventListener('keydown', unlockPlay, { once: true });
-            window.addEventListener('scroll', unlockPlay, { once: true });
-          });
-      }
-    };
+    el.muted = false;
+    el.volume = volume;
 
-    playAudio();
-  }, [audioConfig.src]);
+    el.play()
+      .then(() => setIsPlaying(true))
+      .catch(() => {
+        const startAudio = () => {
+          if (el && el.paused) {
+            el.muted = false;
+            el.volume = volume;
+            el.play()
+              .then(() => setIsPlaying(true))
+              .catch(() => {});
+          }
+          window.removeEventListener('pointerdown', startAudio);
+          window.removeEventListener('scroll', startAudio);
+          window.removeEventListener('keydown', startAudio);
+          window.removeEventListener('touchstart', startAudio);
+        };
+
+        window.addEventListener('pointerdown', startAudio, { once: true });
+        window.addEventListener('scroll', startAudio, { once: true });
+        window.addEventListener('keydown', startAudio, { once: true });
+        window.addEventListener('touchstart', startAudio, { once: true });
+      });
+  }, [audioConfig.src, volume]);
 
   // Volume synchronization
   useEffect(() => {
@@ -127,6 +131,8 @@ export default function AudioPlayer() {
       <audio
         ref={audioRef}
         src={audioConfig.src}
+        autoPlay
+        playsInline
         loop
         preload="auto"
         onPlay={() => setIsPlaying(true)}

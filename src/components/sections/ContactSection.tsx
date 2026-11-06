@@ -234,7 +234,6 @@ export default function ContactSection({ contact }: ContactSectionProps) {
                 >
                   <option>Full-Time SDE-1 / Software Engineering Role</option>
                   <option>High-Throughput Production Web Platform Build</option>
-                  <option>Cloud Kitchen KDS / POS Architecture</option>
                   <option>Developer Community Mentorship & Speaking</option>
                   <option>Other Exploration</option>
                 </select>
