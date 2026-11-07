@@ -32,7 +32,7 @@ const INITIAL_PROJECTS: ProjectItem[] = [
     category: 'distributed',
     desc: 'Designed a decentralized matching engine pairing verified employees with job candidates using Redis pub/sub queues and PostgreSQL transaction locks to prevent double-claim collisions.',
     tags: ['Distributed', 'Docker', 'Redis', 'PostgreSQL'],
-    url: 'https://github.com/TahaKhanSDE',
+    url: 'https://job-referral-network-system.vercel.app',
   },
   {
     id: 'pet-health',
@@ -41,7 +41,7 @@ const INITIAL_PROJECTS: ProjectItem[] = [
     category: 'production',
     desc: 'Emergency vet locator with symptom analysis, digital health card history, and clinic appointment booking built using Flask and machine learning classification models.',
     tags: ['Python', 'Flask', 'ML Models', 'Overpass API'],
-    url: '#contact',
+    url: 'https://pet-animalhospitalcare-system.onrender.com',
   },
   {
     id: 'thealgorithms',
