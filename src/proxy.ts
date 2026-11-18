@@ -2,17 +2,20 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { jwtVerify } from 'jose';
 
-export async function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+export async function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
   const isStudioRoute = pathname.startsWith('/studio');
-  const isMutationApi = pathname.startsWith('/api/projects') && req.method !== 'GET';
+  // POST /api/endorsements is public and must stay off this matcher.
+  const isMutationApi =
+    (pathname.startsWith('/api/projects') || pathname.startsWith('/api/portfolio')) &&
+    request.method !== 'GET';
 
   if (isStudioRoute || isMutationApi) {
-    const token = req.cookies.get('portfolio_auth_token')?.value;
+    const token = request.cookies.get('portfolio_auth_token')?.value;
 
     if (!token) {
       return isStudioRoute
-        ? NextResponse.redirect(new URL('/', req.url))
+        ? NextResponse.redirect(new URL('/', request.url))
         : NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -22,7 +25,7 @@ export async function middleware(req: NextRequest) {
       return NextResponse.next();
     } catch {
       return isStudioRoute
-        ? NextResponse.redirect(new URL('/', req.url))
+        ? NextResponse.redirect(new URL('/', request.url))
         : NextResponse.json({ error: 'Invalid Token' }, { status: 401 });
     }
   }
@@ -31,5 +34,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/studio/:path*', '/api/projects/:path*'],
+  matcher: ['/studio/:path*', '/api/projects/:path*', '/api/portfolio/:path*'],
 };

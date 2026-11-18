@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 import AudioPlayer from '@/components/AudioPlayer';
+import { PortfolioProvider } from '@/context/PortfolioContext';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -35,8 +36,10 @@ export default function RootLayout({
         className="min-h-screen bg-[#121316] text-[#F4F5F7] font-sans antialiased selection:bg-[#FFD13B] selection:text-[#121316]"
         suppressHydrationWarning
       >
-        {children}
-        <AudioPlayer />
+        <PortfolioProvider>
+          {children}
+          <AudioPlayer />
+        </PortfolioProvider>
         <Analytics />
       </body>
     </html>

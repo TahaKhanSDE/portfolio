@@ -60,3 +60,11 @@ Thumbs.db
 *.njsproj
 .vercel
 .env*
+
+# Local AI Skills & Cursor Rules
+.ai/
+.cursor/rules/
+
+# Agent Skills CLI folders
+.agents/
+.skills/

@@ -1,80 +1,34 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-
-interface Endorsement {
-  id: string;
-  name: string;
-  role: string;
-  quote: string;
-  initials: string;
-  avatarBg: string;
-}
-
-const DEFAULT_ENDORSEMENTS: Endorsement[] = [
-  {
-    id: 'default-1',
-    name: 'Aditya Sharma',
-    role: 'Operations Lead • Sharma & Saraf Groups LLP',
-    quote: 'Taha took our raw cloud kitchen workflows and engineered a rock-solid KDS platform within weeks. His grasp of real-time state synchronization and database indexes saved us from catastrophic peak order dropouts during high-volume dining hours.',
-    initials: 'AS',
-    avatarBg: '#FFD13B',
-  },
-  {
-    id: 'default-2',
-    name: 'Adil Hashmi',
-    role: 'Senior Engineering Collaborator',
-    quote: 'Extremely proactive engineer who doesn\'t wait for specifications to be spoon-fed. His pull requests are clean, well-tested, and he actively mentors other developers in the community with infectious curiosity and speed.',
-    initials: 'AH',
-    avatarBg: '#F4F5F7',
-  },
-];
+import { usePortfolio } from '@/context/PortfolioContext';
+import { Endorsement } from '@/data/defaultPortfolio';
 
 export default function SocialProofSection() {
-  const [endorsements, setEndorsements] = useState<Endorsement[]>(DEFAULT_ENDORSEMENTS);
+  const { state, refreshPortfolio } = usePortfolio();
+  // Seed from context; allow in-session user additions without persisting to Redis
+  const [endorsements, setEndorsements] = useState<Endorsement[]>(state.endorsements);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', role: '', quote: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Load custom endorsements from local storage
+  // Sync when context hydrates from Redis
   useEffect(() => {
-    const saved = localStorage.getItem('thk_user_endorsements');
-    if (saved) {
-      try {
-        const parsed: Endorsement[] = JSON.parse(saved);
-        setEndorsements([...parsed, ...DEFAULT_ENDORSEMENTS]);
-      } catch {
-        setEndorsements(DEFAULT_ENDORSEMENTS);
-      }
-    }
-  }, []);
+    setEndorsements(state.endorsements);
+  }, [state.endorsements]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.quote.trim()) return;
 
-    const initials = formData.name
-      .split(' ')
-      .map((part) => part[0])
-      .join('')
-      .substring(0, 2)
-      .toUpperCase() || 'TH';
-
-    const newEntry: Endorsement = {
-      id: `end-${Date.now()}`,
-      name: formData.name.trim(),
-      role: formData.role.trim() || 'Software Industry Peer',
-      quote: formData.quote.trim(),
-      initials,
-      avatarBg: '#FFD13B',
-    };
-
-    const updated = [newEntry, ...endorsements];
-    setEndorsements(updated);
-
-    // Save only user additions to localStorage
-    const userOnly = updated.filter((item) => !item.id.startsWith('default-'));
-    localStorage.setItem('thk_user_endorsements', JSON.stringify(userOnly));
+    const res = await fetch('/api/endorsements', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+    if (res.status === 200) {
+      await refreshPortfolio();
+    }
 
     setIsSubmitted(true);
     setTimeout(() => {
