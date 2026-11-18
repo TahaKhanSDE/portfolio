@@ -66,6 +66,11 @@ export default function StudioModals({
     if (passkeyInput === 'wingslug2026') {
       setIsAdminUnlocked(true);
       setPasskeyError(false);
+      try {
+        sessionStorage.setItem('studio-passkey', passkeyInput);
+      } catch {
+        /* sessionStorage unavailable; passkeyInput state still holds it */
+      }
       // Reset drafts to current context state each time studio is unlocked
       setDraftAvailability(state.availability);
       setDraftEyebrow(state.eyebrow);
@@ -82,6 +87,11 @@ export default function StudioModals({
   const handleCloseAdmin = () => {
     setIsAdminUnlocked(false);
     setPasskeyInput('');
+    try {
+      sessionStorage.removeItem('studio-passkey');
+    } catch {
+      /* ignore */
+    }
     setPasskeyError(false);
     setSaveError(null);
     onCloseAdmin();

@@ -21,6 +21,16 @@ interface PortfolioContextValue {
 
 const PortfolioContext = createContext<PortfolioContextValue | null>(null);
 
+function studioPasskeyHeader(): Record<string, string> {
+  if (typeof window === 'undefined') return {};
+  try {
+    const passkey = sessionStorage.getItem('studio-passkey');
+    return passkey ? { 'x-studio-passkey': passkey } : {};
+  } catch {
+    return {};
+  }
+}
+
 export function PortfolioProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<PortfolioState>(DEFAULT_PORTFOLIO_STATE);
 
@@ -47,7 +57,7 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
       try {
         const res = await fetch('/api/portfolio', {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', ...studioPasskeyHeader() },
           body: JSON.stringify(patch),
         });
         if (res.ok) {
@@ -64,7 +74,10 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
 
   const resetPortfolio = useCallback(async (): Promise<{ ok: boolean; status: number }> => {
     try {
-      const res = await fetch('/api/portfolio', { method: 'DELETE' });
+      const res = await fetch('/api/portfolio', {
+        method: 'DELETE',
+        headers: studioPasskeyHeader(),
+      });
       if (res.ok) {
         setState(DEFAULT_PORTFOLIO_STATE);
       }

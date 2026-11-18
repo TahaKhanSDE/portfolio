@@ -6,9 +6,20 @@ export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isStudioRoute = pathname.startsWith('/studio');
   // POST /api/endorsements is public and must stay off this matcher.
+  const isPortfolioMutation =
+    pathname.startsWith('/api/portfolio') &&
+    (request.method === 'PUT' || request.method === 'DELETE');
   const isMutationApi =
     (pathname.startsWith('/api/projects') || pathname.startsWith('/api/portfolio')) &&
     request.method !== 'GET';
+
+  if (isPortfolioMutation) {
+    const passkey = request.headers.get('x-studio-passkey');
+    const expected = process.env.ADMIN_INITIAL_PASSWORD;
+    if (passkey && expected && passkey === expected) {
+      return NextResponse.next();
+    }
+  }
 
   if (isStudioRoute || isMutationApi) {
     const token = request.cookies.get('portfolio_auth_token')?.value;
