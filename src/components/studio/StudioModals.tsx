@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { usePortfolio } from '@/context/PortfolioContext';
+import type { Endorsement } from '@/data/defaultPortfolio';
 import { ProjectItem, ExperienceItem } from '@/types';
 
 interface StudioModalsProps {
@@ -28,7 +29,7 @@ export default function StudioModals({
   const [isAdminUnlocked, setIsAdminUnlocked] = useState(false);
   const [passkeyInput, setPasskeyInput] = useState('');
   const [passkeyError, setPasskeyError] = useState(false);
-  const [activeTab, setActiveTab] = useState<'profile' | 'terminal' | 'soundtrack' | 'timeline' | 'vault'>('profile');
+  const [activeTab, setActiveTab] = useState<'profile' | 'terminal' | 'soundtrack' | 'timeline' | 'vault' | 'endorsements'>('profile');
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
 
@@ -81,6 +82,16 @@ export default function StudioModals({
       setSaveError(null);
     } else {
       setPasskeyError(true);
+    }
+  };
+
+  const handleDeleteEndorsement = async (endorsement: Endorsement) => {
+    const filtered = state.endorsements.filter((item) => item.id !== endorsement.id);
+    const { ok, status } = await updatePortfolio({ endorsements: filtered });
+    if (ok) {
+      onToast('Endorsement deleted.');
+    } else {
+      setSaveError(status === 401 ? 'Session expired.' : `Delete failed (${status}).`);
     }
   };
 
@@ -337,13 +348,13 @@ export default function StudioModals({
 
                 {/* Navigation Tabs */}
                 <div className="flex flex-wrap items-center gap-2 border-b border-zinc-800 pb-3">
-                  {(['profile', 'terminal', 'soundtrack', 'timeline', 'vault'] as const).map((tab, i) => (
+                  {(['profile', 'terminal', 'soundtrack', 'timeline', 'vault', 'endorsements'] as const).map((tab, i) => (
                     <button
                       key={tab}
                       onClick={() => { setActiveTab(tab); setSaveError(null); }}
                       className={`px-3 py-1.5 rounded font-bold transition-colors ${activeTab === tab ? 'bg-[#FFD13B] text-[#121316]' : 'bg-[#121316] text-zinc-400'}`}
                     >
-                      {i + 1}. {tab === 'profile' ? 'Profile & Resume' : tab === 'terminal' ? 'Terminal & Contact' : tab === 'soundtrack' ? 'Background Music' : tab === 'timeline' ? 'Add Experience' : 'Add Project'}
+                      {i + 1}. {tab === 'profile' ? 'Profile & Resume' : tab === 'terminal' ? 'Terminal & Contact' : tab === 'soundtrack' ? 'Background Music' : tab === 'timeline' ? 'Add Experience' : tab === 'vault' ? 'Add Project' : 'Endorsements'}
                     </button>
                   ))}
                 </div>
@@ -563,6 +574,31 @@ export default function StudioModals({
                       {isSaving ? 'Saving…' : '+ Inject Project into Vault Grid'}
                     </button>
                   </form>
+                )}
+
+                {activeTab === 'endorsements' && (
+                  <div className="space-y-3">
+                    {state.endorsements.length === 0 ? (
+                      <p className="text-sm text-zinc-400">No endorsements to manage.</p>
+                    ) : state.endorsements.map((endorsement) => (
+                      <div key={endorsement.id} className="flex items-start justify-between gap-4 bg-[#121316] p-3 border border-zinc-800">
+                        <div className="min-w-0">
+                          <p className="font-bold text-[#F4F5F7]">{endorsement.name}</p>
+                          <p className="text-xs text-zinc-400">{endorsement.role}</p>
+                          <p className="mt-1 text-sm text-zinc-300">
+                            {endorsement.quote.length > 120 ? `${endorsement.quote.slice(0, 120)}…` : endorsement.quote}
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => handleDeleteEndorsement(endorsement)}
+                          className="shrink-0 border border-red-500/50 px-3 py-1 font-mono text-xs tracking-widest text-red-400 hover:bg-red-500/10"
+                        >
+                          DELETE
+                        </button>
+                      </div>
+                    ))}
+                  </div>
                 )}
 
                 {/* Footer row: Reset + Close */}
